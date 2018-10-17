@@ -1,6 +1,160 @@
-body {
-  min-width: 800px;
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 200px;
   font-family: sans-serif;
+  background: #ccc;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#app-body {
+  flex: 1;
+  overflow: auto;
+}
+
+#controls {
+  background: #555;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6px 10px 1px;
+
+  button {
+    flex: 0;
+    white-space: nowrap;
+  }
+
+  div {
+    display: flex;
+    *:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+}
+
+#tabs-list {
+  &, li {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  font-size: 14px;
+
+  label { // Each tab entry
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    background: #F6F6F6;
+    border-bottom: 1px solid #DEDEDE;
+    border-top: 1px 0 #fff;
+
+    display: flex;
+    justify-items: stretch;
+    flex-direction: row;
+
+    &:hover {
+      background: #fff;
+    }
+    &.active {
+      .tab-image { background: rgba(0, 220, 0, 0.7); }
+      font-weight: bold;
+    }
+    &.checked {
+      background: #cde;
+    }
+    &.discarded {
+      opacity: 0.8;
+    }
+  
+    input { display: none; }
+
+    .tab-image {
+      display: flex;
+      width: 34px;
+      min-height: 32px;
+      justify-content: center;
+      padding-top: 6px;
+      line-height: 24px;
+    }
+
+    .tab-title {
+      flex: 1;
+      padding: 10px 10px 8px 8px;
+      color: #333;
+    }
+
+    .tab-controls {
+      display: flex;
+      font-size: 10px;
+      align-items: stretch;
+      flex-direction: row;
+      font-size: 20px;
+      margin-bottom: -1px;
+
+      a {
+        padding: 0 20px;
+        color: white;
+        text-decoration: none;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: #ccc;
+        }
+      }
+    }
+
+    .tab-controls a {
+      visibility: hidden;
+    }
+    
+    &:hover .tab-controls a {
+      visibility: visible;
+    }
+  }
+}
+
+#notification {
+  display: block;
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: #4a4;
+  z-index: 10000;
+  text-align: center;
+  padding: 12px 0;
+  font-family: "San Francisco", Helvetica, Arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+}
+
+#notification.hide {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  transition-delay: 1s;
+  pointer-events: none;
 }

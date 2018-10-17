@@ -1,16 +1,29 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import './style/index.scss'
-// Shared components
-import CompA from '../components/CompA'
 // Private components
-import App from './components/App'
+import App from './App'
+import {TabList, TabListView} from './tablist';
 
-/**
- * Shared component
- */
+browser.windows.getCurrent()
+.then(win => {
+  const tablist = new TabList(win.id!, {
+    reload(tabs: browser.tabs.Tab[]) {
+      // console.log('reload...', tabs);
+      ReactDOM.render(
+        <App tabs={tabs} />,
+        document.getElementById('root') as HTMLElement
+      );
+    }
+  });
+});
 
 ReactDOM.render(
-  <div><App/><CompA/></div>,
+  <div>Loading...</div>,
   document.getElementById('root') as HTMLElement
 )
+
+// var background: any = chrome.extension.getBackgroundPage();
+// addEventListener("unload", function (event) {
+//   background.popupUnload();
+// }, true);

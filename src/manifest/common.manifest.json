@@ -14,20 +14,19 @@
     ]
   },
 
-  "content_scripts": [
-    {
-      "js": ["content.js"],
-      "matches": ["<all_urls>"]
-    }
-  ],
-
-  "browser_action": {
+  "sidebar_action": {
     "default_icon": {
       "19": "static/logo.png",
       "38": "static/logo.png"
     },
-    "default_popup": "popup.html"
+    "browser_style": true,
+    "default_title": "Tab Basket",
+    "default_panel": "popup.html"
   },
+
+  "permissions": [
+    "tabs", "clipboardWrite", "webNavigation"
+  ],
 
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
