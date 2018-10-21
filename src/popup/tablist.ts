@@ -10,7 +10,6 @@ const COMPACT_MODE_STRICT = 2;
  * prefs
  */
 export class TabList {
-  _props: any;
   _tabs: Map<any, any>;
   _active: null | boolean;
   _windowId: number;
@@ -202,7 +201,29 @@ export class TabList {
     this._markDirty();
   }
 
-  // Tab controller
+  async populate() {
+    this._tabs = new Map();
+    const tabs = await browser.tabs.query({windowId: this._windowId});
+    // Sort the tabs by index so we can insert them in sequence.
+    tabs.sort((a, b) => a.index - b.index);
+    this._view.populate!(tabs);
+    let activeTab;
+    for (let tab of tabs) {
+      if (tab.active) {
+        activeTab = tab;
+      }
+      this._tabs.set(tab.id, tab);
+    }
+    if (activeTab) {
+      this._view.invalidateThumbnail!(activeTab);
+      this._view.scrollIntoView!(activeTab);
+    }
+    this._markDirty();
+  }
+
+  // Tab controller API
+  //
+  // API for controlling browser.tab.Tab objects as a group.
 
   closeTabsAfter(tabIndex) {
     const toClose = [...this._tabs.values()]
@@ -248,6 +269,28 @@ export class TabList {
     }
   }
 
+  // gather() {
+  //   let indexes: Array<number> = [];
+  //   this.props.tabs.forEach(tab => {
+  //     if (this.state.checked.has(tab.id)) {
+  //       indexes.push(tab.index);
+  //     }
+  //   })
+  //   if (indexes.length == 0) {
+  //     indexes.push(0);
+  //   }
+  //   indexes.sort();
+
+  //   if (indexes.every((index, i) => i > 0 ? index - indexes[i - 1] == 1 : true)) {
+  //     // Skip any moving.
+  //     console.info('Skipping gather, tabs are sequential.');
+  //     return;
+  //   }
+
+  //   // Leftmost index
+  //   browser.tabs.move(Array.from(this.state.checked), { index: indexes[0] });
+  // }
+
   async moveTabToBottom(tab: browser.tabs.Tab) {
     let sameCategoryTabs = await (browser.tabs as any).query({
       hidden: false,
@@ -266,25 +309,6 @@ export class TabList {
     });
     let lastIndex = sameCategoryTabs[0].index;
     await browser.tabs.move(tab.id!, {index: lastIndex});
-  }
-
-  async populate() {
-    const tabs = await browser.tabs.query({windowId: this._windowId});
-    // Sort the tabs by index so we can insert them in sequence.
-    tabs.sort((a, b) => a.index - b.index);
-    this._view.populate!(tabs);
-    let activeTab;
-    for (let tab of tabs) {
-      if (tab.active) {
-        activeTab = tab;
-      }
-      this._tabs.set(tab.id, tab);
-    }
-    if (activeTab) {
-      this._view.invalidateThumbnail!(activeTab);
-      this._view.scrollIntoView!(activeTab);
-    }
-    this._markDirty();
   }
 }
 

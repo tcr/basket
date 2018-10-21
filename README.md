@@ -10,14 +10,34 @@ Then
 web-ext run
 ```
 
+## References for Pocket Integration
+
+https://chrome.google.com/webstore/detail/batch-save-pocket/ihhiomekhplpdojbcaniaglcfopckaef?hl=en
+
+https://chrome.google.com/webstore/detail/save-all-tabs-to-pocket/bhmmhhjpffepjokjohnibgojinhekcad?hl=en
+
+## References for Tab Integration
+
+https://github.com/eoger/tabcenter-redux
+
+## References for Styling
+
+https://design.firefox.com/photon/visuals/typography.html (also see tabcenter-redux)
+
+## References for future WebExtension APIs
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1332447 (Hide horizontal tab bar)
+
 # Install
 
 <pre>
-git clone git@github.com:crimx/create-react-typescript-sass-webextension.git <strong>YourRepoName</strong>
-cd <strong>YourRepoName</strong>
-git remote set-url git@github.com:<strong>YourUserName</strong>/<strong>YourRepoName</strong>.git
+git clone https://github.com/tcr/basket.git
 yarn install
 </pre>
+
+---
+
+Boilerplate
 
 # Usage
 

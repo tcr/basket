@@ -1,5 +1,5 @@
 {
-  "name": "Create React Typescript Sass Webextension",
+  "name": "Tab Basket",
   "description": "Boilerplate for building webextension targeting Chrome & Firefox with react, typescript and sass",
 
   "icons": {
@@ -14,13 +14,30 @@
     ]
   },
 
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      },
+      "description": "Opens the tag manager"
+    }
+  },
+
   "sidebar_action": {
     "default_icon": {
       "19": "static/logo.png",
       "38": "static/logo.png"
     },
     "browser_style": true,
-    "default_title": "Tab Basket",
+    "default_title": "Tab Manager",
     "default_panel": "popup.html"
   },
 

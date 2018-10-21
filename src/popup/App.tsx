@@ -2,7 +2,8 @@ import * as React from 'react'
 const logo = require('../assets/logo.svg')
 
 class Comp extends React.Component<{
-  tabs: browser.tabs.Tab[]
+  tabs: browser.tabs.Tab[],
+  refresh: () => void,
 }, {
   checked: Set<number>,
 }> {
@@ -13,13 +14,21 @@ class Comp extends React.Component<{
   render () {
     return (
       <div id="app">
+        <div id="controls">
+          <div>
+            <button onClick={e => this.gather()} disabled={this.state.checked.size == 0} className="browser-style">Gather</button>
+            <button onClick={e => this.exportURLs()} disabled={this.state.checked.size == 0} className="browser-style">Copy as URLs</button>
+          </div>
+          <button onClick={e => this.closeGroup()} disabled={this.state.checked.size == 0} className="browser-style danger">Close</button>
+          <button onClick={e => this.props.refresh()}>Refresh</button>
+        </div>
         <div id="app-body">
           <ol id="tabs-list">
             {this.props.tabs.map(x => {
               if (!x.id) {
                 return <div />
               }
-              return <li key={x.index}>
+              return <li key={x.id}>
                 <label
                   onClick={e => {
                     if ((e.target as any).tagName.match(/INPUT/i)) { 
@@ -43,20 +52,13 @@ class Comp extends React.Component<{
                   </span>
                   <span className="tab-title">{x.title}</span>
                   <span className="tab-controls">
-                    <a onClick={e => { this.switchToTab(x); e.preventDefault(); }}>▶️</a>
-                    {/* <a onClick={e => { this.closeTab(x); e.preventDefault(); }}>💀</a> */}
+                    <a className="opt-disabled" onClick={e => { this.switchToTab(x); e.preventDefault(); }}>▶️</a>
+                    <a className="opt-enabled" onClick={e => { this.closeTab(x); e.preventDefault(); }}>🗑</a>
                   </span>
                 </label>
               </li>;
             })}
           </ol>
-        </div>
-        <div id="controls">
-          <div>
-            <button onClick={e => this.gather()} disabled={this.state.checked.size == 0} className="browser-style">Gather</button>
-            <button onClick={e => this.exportURLs()} disabled={this.state.checked.size == 0} className="browser-style">Copy as URLs</button>
-          </div>
-          <button onClick={e => this.closeGroup()} disabled={this.state.checked.size == 0} className="browser-style danger">Close</button>
         </div>
       </div>
     )

@@ -57,6 +57,7 @@ body {
   }
 
   font-size: 14px;
+  padding-bottom: 6px !important;
 
   label { // Each tab entry
     user-select: none;
@@ -65,6 +66,7 @@ body {
     background: #F6F6F6;
     border-bottom: 1px solid #DEDEDE;
     border-top: 1px 0 #fff;
+    padding-left: 6px;
 
     display: flex;
     justify-items: stretch;
@@ -74,14 +76,17 @@ body {
       background: #fff;
     }
     &.active {
-      .tab-image { background: rgba(0, 220, 0, 0.7); }
+      border-left: 6px solid rgba(0, 220, 0, 0.7);
+      padding-left: 0;
       font-weight: bold;
+      letter-spacing: -.4px;
     }
     &.checked {
       background: #cde;
     }
     &.discarded {
       opacity: 0.8;
+      .tab-image { opacity: 0.8; }
     }
   
     input { display: none; }
@@ -99,6 +104,12 @@ body {
       flex: 1;
       padding: 10px 10px 8px 8px;
       color: #333;
+    }
+
+    &:not(.checked) .tab-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .tab-controls {
@@ -124,14 +135,18 @@ body {
       }
     }
 
-    .tab-controls a {
-      visibility: hidden;
-    }
-    
-    &:hover .tab-controls a {
-      visibility: visible;
+    &:not(:hover) .tab-controls {
+      display: none;
     }
   }
+}
+
+#root.key-option {
+  .opt-disabled { display: none !important; }
+}
+
+#root:not(.key-option) {
+  .opt-enabled { display: none !important; }
 }
 
 #notification {
