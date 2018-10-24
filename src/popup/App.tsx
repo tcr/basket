@@ -40,6 +40,13 @@ class Comp extends React.Component<{
                     this.state.checked.has(x.id) ? 'checked' : '',
                     x.discarded ? 'discarded' : '',
                   ].join(' ')}
+                  ref={e => {
+                    if (x.active) {
+                      requestAnimationFrame(() => {
+                        (e as HTMLElement).scrollIntoView();
+                      });
+                    }
+                  }}
                 >
                   <input
                     type="checkbox"
