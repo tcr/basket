@@ -43,7 +43,9 @@ class Comp extends React.Component<{
                   ref={e => {
                     if (x.active) {
                       requestAnimationFrame(() => {
-                        (e as HTMLElement).scrollIntoView();
+                        if (e) {
+                          (e as HTMLElement).scrollIntoView();
+                        }
                       });
                     }
                   }}

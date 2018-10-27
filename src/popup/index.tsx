@@ -56,24 +56,24 @@ const Modifiers = {
   },
 };
 
-window.addEventListener('keydown', (e) => {
-  if (e.keyCode == 18) {
+document.addEventListener('mousemove', (e) => {
+  if ((e as any).altKey) {
     Modifiers.down('option');
-  }
-});
-window.addEventListener('keyup', (e) => {
-  if (e.keyCode == 18) {
+  } else if (Modifiers.state.option) {
     Modifiers.up('option');
   }
 });
-
-browser.runtime.onMessage.addListener((msg) => {
-  switch (msg.event) {
-    case 'keydown':
-      Modifiers.down(msg.key);
-      break;
-    case 'keyup':
-      Modifiers.up(msg.key);
-      break;
+document.addEventListener('keydown', (e) => {
+  if ((e as any).altKey) {
+    Modifiers.down('option');
+  } else if (Modifiers.state.option) {
+    Modifiers.up('option');
+  }
+});
+document.addEventListener('keyup', (e) => {
+  if ((e as any).altKey) {
+    Modifiers.down('option');
+  } else if (Modifiers.state.option) {
+    Modifiers.up('option');
   }
 });
