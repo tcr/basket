@@ -17,10 +17,11 @@ class Comp extends React.Component<{
         <div id="controls">
           <div>
             <button onClick={e => this.gather()} disabled={this.state.checked.size == 0} className="browser-style">Gather</button>
-            <button onClick={e => this.exportURLs()} disabled={this.state.checked.size == 0} className="browser-style">Copy as URLs</button>
+            <button onClick={e => this.exportURLs()} disabled={this.state.checked.size == 0} className="browser-style">URLs</button>
+            <button onClick={e => this.closeGroup()} disabled={this.state.checked.size == 0} className="browser-style danger">Close</button>
           </div>
-          <button onClick={e => this.closeGroup()} disabled={this.state.checked.size == 0} className="browser-style danger">Close</button>
-          <button onClick={e => this.props.refresh()}>Refresh</button>
+          <button onClick={e => this.discardAll()} className="browser-style">DiscardAll</button>
+          <button onClick={e => this.props.refresh()}>😕</button>
         </div>
         <div id="app-body">
           <ol id="tabs-list">
@@ -71,6 +72,10 @@ class Comp extends React.Component<{
         </div>
       </div>
     )
+  }
+
+  discardAll() {
+    (browser.tabs as any).discard(this.props.tabs.map(tab => tab.id));
   }
 
   switchToTab(x: browser.tabs.Tab) {
