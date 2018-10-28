@@ -1,6 +1,6 @@
 {
-  "name": "create-react-typescript-sass-webextension",
-  "version": "0.1.0",
+  "name": "basket",
+  "version": "0.1.3",
   "description": "Boilerplate for building webextension targeting Chrome & Firefox with react, typescript and sass",
   "private": true,
   "scripts": {
@@ -19,19 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/crimx/create-react-typescript-sass-webextension"
+    "url": "https://github.com/tcr/basket"
   },
-  "homepage": "https://github.com/crimx/create-react-typescript-sass-webextension",
+  "homepage": "https://github.com/tcr/basket",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/crimx/create-react-typescript-sass-webextension/issues"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "dependencies": {
     "@types/node": "^9.4.0",
     "@types/react": "^16.0.34",

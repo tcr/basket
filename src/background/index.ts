@@ -9,11 +9,15 @@
   });
 };
 
-browser.runtime.onMessage.addListener(message => {
-  if (message.type === 'GREETING') {
-    console.log('hi');
-    // return new Promise(resolve =>
-    //   setTimeout(() => resolve('Hi! Got your message a second ago.'), 1000)
-    // )
-  }
-})
+// browser.runtime.onMessage.addListener(message => {
+//   if (message.type === 'GREETING') {
+//     console.log('hi');
+//     // return new Promise(resolve =>
+//     //   setTimeout(() => resolve('Hi! Got your message a second ago.'), 1000)
+//     // )
+//   }
+// })
+
+browser.browserAction.onClicked.addListener(() => {
+  browser.runtime.openOptionsPage();
+});

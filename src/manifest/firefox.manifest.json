@@ -1,1 +1,11 @@
-{}
+{
+  "sidebar_action": {
+    "default_icon": {
+      "19": "static/logo.png",
+      "38": "static/logo.png"
+    },
+    "browser_style": true,
+    "default_title": "Tab Manager",
+    "default_panel": "popup.html"
+  }
+}
